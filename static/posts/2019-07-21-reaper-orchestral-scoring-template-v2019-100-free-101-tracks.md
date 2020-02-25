@@ -4,9 +4,8 @@ slug: reaper-orchestral-scoring-template-v2019-100-free-101-tracks
 date_published: 2019-07-21T18:21:56.000Z
 date_updated: 2019-07-21T18:21:56.000Z
 tags: 
-   - reaper
-   - tutorial
-   - audio production
+   - Reaper
+   - Audio
 ---
 
 Hello once again internet people.

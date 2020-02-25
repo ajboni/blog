@@ -4,9 +4,9 @@ slug: kingdom-come-deliverance
 date_published: 2019-07-29T14:34:33.000Z
 date_updated: 2019-08-10T20:01:47.000Z
 tags: 
-   - linux
-   - gaming
-   - proton
+   - Linux
+   - Gaming
+   - Proton
 ---
 
 I recently impulse bought [Kingdom Come: Deliverance](https://store.steampowered.com/app/379430/Kingdom_Come_Deliverance/) in hope that proton would handle it out of the box. I quickly discovered that performance was really bad and a lot of users were having the same issue.
