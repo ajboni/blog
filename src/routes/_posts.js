@@ -4,6 +4,18 @@
 // underscore tells Sapper not to do that.
 import fs from 'fs';
 import marked from 'marked';
+import hljs from 'highlight.js';
+hljs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
+hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
+
+marked.setOptions({
+	highlight: function (code, language) {
+
+		const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+		return hljs.highlight(validLanguage, code).value;
+	},
+})
+
 const matter = require('gray-matter');
 export let posts = [];
 export let tags = [];
@@ -11,7 +23,7 @@ export let tags = [];
 let postsFile = fs.readdirSync('./static/posts/');
 postsFile.forEach(postFile => {
 	const fileContents = fs.readFileSync('./static/posts/' + postFile, 'utf8');
-	const matterPost = matter(fileContents, { excerpt: true });
+	const matterPost = matter(fileContents, { excerpt: true, excerpt_separator: "<!-- more -->" });
 	matterPost.content = marked(matterPost.content)
 	matterPost.excerpt = marked(matterPost.excerpt)
 	posts.push(matterPost);

@@ -1,4 +1,5 @@
 import { posts, tags } from './_posts.js';
+import { getPostDate } from '../store.js'
 
 export function get(req, res) {
 	let processedPosts = posts;
@@ -14,7 +15,7 @@ export function get(req, res) {
 	// }
 
 
-	const sortedPosts = processedPosts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+	const sortedPosts = processedPosts.sort((a, b) => new Date(getPostDate(b)) - new Date(getPostDate(a)));
 
 	const contents = (sortedPosts.map(post => {
 		return {

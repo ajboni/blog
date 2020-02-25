@@ -19,7 +19,7 @@
 </script>
 
 <style>
-  .post-content :global(p) {
+  /* .post-content :global(p) {
     @apply leading-relaxed mb-4;
   }
   .post-content :global(h1) {
@@ -34,7 +34,7 @@
   }
   .post-content :global(code) {
     @apply break-words whitespace-pre-line;
-  }
+  } */
 </style>
 
 <svelte:head>
@@ -42,12 +42,12 @@
 </svelte:head>
 
 <div
-  class=" bg-gray-100 flex flex-col border-2 rounded-md shadow-lg px-8 py-8
-  sm:py-16 sm:px-16 text-lg leading-relaxed w-full break-words">
+  class="bg-white flex flex-col border-2 rounded-md shadow-lg px-8 py-8 sm:py-16
+  sm:px-16 text-lg leading-relaxed w-full break-words">
 
   <h1 class="text-4xl font-thin">{post.data.title}</h1>
   <PostInfo {post} />
-  <div class="post-content">
+  <div class="markdown-body bg-white">
     {@html post.content}
   </div>
 </div>

@@ -13,9 +13,39 @@
     "w-1/4 sm:w-full text-center p-2 hover:bg-purple-500 ";
 </script>
 
+<style>
+  .gradient {
+    font-family: "Monoton";
+    font-size: 5rem;
+    margin: 3rem;
+    border-radius: 100px;
+    padding: 1rem;
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #9d50bb; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #805ad5,
+      #9d50bb
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #6e48aa,
+      #9d50bb
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+</style>
+
+<svelte:head />
+
 <div
   class="flex flex-row sm:flex-col items-center flex-grow h-full justify-start
   sm:justify-center text-2xl">
+
+  <div class="gradient">AjB</div>
 
   <a
     class={sidebarBtnClass + ' ' + (segment === undefined ? 'bg-purple-500' : '')}
@@ -23,11 +53,11 @@
     Home
   </a>
 
-  <a
+  <!-- <a
     class={sidebarBtnClass + ' ' + (segment === 'about' ? 'bg-purple-500' : '')}
     href="about">
     About
-  </a>
+  </a> -->
 
   <div
     class={'hidden sm:flex w-full my-2 sm:w-4/6 justify-center flex-wrap ' + ' '}>

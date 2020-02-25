@@ -46,7 +46,7 @@ incidit, cognovi pronus exstructas viribus luce.
 
 However you get the code, you can install dependencies and run the project in development mode with:
 
-```bash
+```shell
 cd my-app
 npm install 
 npm run dev

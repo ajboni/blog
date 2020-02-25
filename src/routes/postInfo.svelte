@@ -1,8 +1,12 @@
 <script>
   export let post;
-  const date = post.data.date ? new Date(post.data.date) : null;
+  import { getPostDate, getDefaultAuthor } from "../store.js";
+
+  const date = new Date(getPostDate(post));
   const tags = post.data.tags ? post.data.tags : null;
+  const author = post.data.author ? post.data.author : getDefaultAuthor();
   let shortDate = isValidDate(date) ? date.toLocaleDateString() : "";
+
   function isValidDate(d) {
     return d instanceof Date && !isNaN(d);
   }
@@ -15,12 +19,12 @@
     </span>
   {/each}
 
-  {#if post.data.author && post.data.author.name}
-    <span class="text-sm ">{post.data.author.name}</span>
+  {#if author && author.name}
+    <span class="text-sm ">{author.name}</span>
   {/if}
 
-  {#if post.data.author && post.data.author.links}
-    {#each post.data.author.links as link}
+  {#if author && author.links}
+    {#each author.links as link}
       <a href={link.url} target="__blank" class="">
         <i class={link.icon} />
       </a>
@@ -28,5 +32,5 @@
   {/if}
   ・
   <span class="text-sm">{shortDate}</span>
-  <hr class="mb-8 mt-4" />
+  <hr class="mb-4 mt-4" />
 </div>

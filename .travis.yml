@@ -8,7 +8,7 @@ script:
  
 deploy:
   local_dir: __sapper__/export
-  fqdn: ssb.aboni.dev
+  fqdn: blog.aboni.dev
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
