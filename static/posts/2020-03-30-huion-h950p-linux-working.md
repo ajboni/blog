@@ -10,7 +10,7 @@ tags:
 
 I recently acquired a Huion Tablet, precisely the model h950p.The tablet works fine out the box but the buttons don't get recognized. 
 
-Thanks to the wonderful [DIGImend]([https://link](https://github.com/DIGImend/digimend-kernel-drivers)) project and [this](https://github.com/DIGImend/digimend-kernel-drivers/issues/308#issuecomment-586072412) issue on github the solution is quite simple.
+Thanks to the wonderful [DIGImend](https://github.com/DIGImend/digimend-kernel-drivers project and [this](https://github.com/DIGImend/digimend-kernel-drivers/issues/308#issuecomment-586072412) issue on github the solution is quite simple.
 
 <!-- more -->
 
