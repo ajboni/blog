@@ -1,0 +1,60 @@
+---
+title: Ethereum Mining on Linux with open source AMD drivers
+slug: 2021-01-12-ethereum-mining-in-linux-with-open-source-amd-drivers
+date_published: 2021-01-12
+date_updated: 2021-01-12
+tags:
+  - Ubuntu
+  - Linux
+  - Ethereum
+---
+
+
+
+
+# 1. Install ROCm
+
+Disclaimer: This potentially could harm tour devices. Use at your own risk.
+
+Using ROCm avoids having to install proprietary AMDGPUpro driver.
+
+```bash
+wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | sudo apt-key add -
+echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ xenial main' | sudo tee /etc/apt/sources.list.d/rocm.list
+sudo apt install libnuma-dev
+sudo apt install build-essential dkms
+sudo apt install rocm-dkms
+sudo usermod -a -G video $LOGNAME
+sudo usermod -a -G render $LOGNAME
+reboot
+```
+
+`/opt/rocm/bin/rocminfo` should find the card.
+
+# 2. Build ethminer with ROCm support
+
+```bash
+CPATH=/opt/rocm/opencl/include cmake --build .
+cmake .. -DETHASHCUDA=OFF -DETHASHCL=ON -DUSE_SYS_OPENCL=ON -DAPICORE=ON -DOpenCL_INCLUDE_DIR=/opt/rocm/opencl/include -DOpenCL_LIBRARY=/opt/rocm/opencl/lib/libOpenCL.so.1.2
+```
+
+``` build/ethminer  ./ethminer``` should output something like: 
+
+
+```
+ethminer 0.19.0-16+commit.47ae149e
+Build: linux/release/gnu
+
+ Id Pci Id    Type Name                          CL    Total Memory  Cl Max Alloc  Cl Max W.Grp 
+--- --------- ---- ----------------------------- ----  ------------  ------------  ------------ 
+  0 08:00.0   Gpu  gfx803                        Yes        8.00 GB       8.00 GB      256.00 B 
+
+```
+
+# 3. Monitor 
+
+```/opt/rocm/bin/rocm-smi --showfan --showtemp --showvoltage --showclock    ```
+
+# 4. Mine
+```./ethminer ...options```
+
