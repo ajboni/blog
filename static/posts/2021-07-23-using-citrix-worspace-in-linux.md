@@ -10,6 +10,7 @@ tags:
 ---
 
 Unfortunately The official debian package works really bad on my system (Linux Mint 20.2). The main issues is that performance is __horrible__ and Microsoft Teams can't access audio and camera for some reason. 
+<!-- more -->
 
 I was about to give up but the I reluctantly tried the [chrome extension](https://chrome.google.com/webstore/detail/citrix-workspace/haiffjcadagjlijoggckpgfnoeiflnem)
 

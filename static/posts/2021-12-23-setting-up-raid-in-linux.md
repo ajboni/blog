@@ -10,7 +10,7 @@ tags:
 ---
 
 I had two 120gb drives, unfortunately, some games are bigger than that and will run much better on a local disk rather than via the ISCSI target. So even with the second drive I was running out of space. RAID to the rescue!
-
+<!-- more -->
 There are a lot of information available online about RAID, but essentially we will be building a RAID 0, which will unify the two drives into a bigger 240gb drive. This will mean, of course, that no data integrity will be guaranteed, and in case of any disk failure, the entire data (240gb) will be lost.
 
 ## Hardware RAID ?
