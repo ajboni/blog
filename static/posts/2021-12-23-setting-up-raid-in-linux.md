@@ -1,6 +1,6 @@
 ---
 title: Setting up RAID In Linux
-slug: 2021-07-23-using-citrix-worspace-in-linux
+slug: 2021-12-23-setting-up-raid-in-linux
 date_published: 2021-12-23
 date_updated: 2021-12-23
 tags:
