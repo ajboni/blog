@@ -3,7 +3,7 @@
 // we don't want to create an `/blog/posts` route — the leading
 // underscore tells Sapper not to do that.
 import fs from 'fs';
-import marked from 'marked';
+import {marked} from 'marked';
 import hljs from 'highlight.js';
 hljs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
 hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
