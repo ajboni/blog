@@ -151,6 +151,12 @@ map("i", "<Return>", "<Return><C-g>u")
 map("i", "<Tab>", "<Tab><C-g>u")
 ```
 
+## Tailwind CSS support
+
+```
+:LspInstall tailwindcss
+```
+
 ## More Awesome Plugins
 
 - https://github.com/folke/trouble.nvim - For a vscode similar "problems" tab.

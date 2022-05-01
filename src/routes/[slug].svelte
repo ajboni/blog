@@ -42,12 +42,12 @@
 </svelte:head>
 
 <div
-  class="bg-white flex flex-col border-2 rounded-md shadow-lg px-8 py-8 sm:py-16
+  class="bg-gray-850 text-gray-300 flex flex-col border-2 border-gray-700 rounded-md shadow-lg px-8 py-8 sm:py-16
   sm:px-16 text-lg leading-relaxed w-full break-words">
 
   <h1 class="text-4xl font-thin">{post.data.title}</h1>
   <PostInfo {post} />
-  <div class="markdown-body bg-white">
+  <div class= "text-gray-300 markdown-body">
     {@html post.content}
   </div>
 </div>

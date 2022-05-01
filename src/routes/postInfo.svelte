@@ -12,9 +12,9 @@
   }
 </script>
 
-<div class="text-gray-600">
+<div class="text-gray-400">
   {#each tags as tag}
-    <span class="text-sm bg-purple-600 text-white p-1 mr-1 text-sm rounded-sm">
+    <span class="bg-purple-800 text-white p-1 mr-1 text-sm rounded-sm">
       {tag}
     </span>
   {/each}
