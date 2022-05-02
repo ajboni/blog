@@ -32,5 +32,5 @@
   {/if}
   ・
   <span class="text-sm">{shortDate}</span>
-  <hr class="mb-4 mt-4" />
+  <hr class="mb-4 mt-4 border-gray-700" />
 </div>
