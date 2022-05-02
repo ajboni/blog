@@ -1,6 +1,6 @@
 ---
 title: Neovim as IDE
-slug: 2022-04-17-neovim-as-ide.md
+slug: 2022-04-17-neovim-as-ide
 date_published: 2022-05-01
 date_updated: 2022-05-01
 tags:

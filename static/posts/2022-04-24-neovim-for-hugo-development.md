@@ -1,6 +1,6 @@
 ---
 title: Neovim for Hugo development (to replace vscode)
-slug: 2022-04-24-neovim-for-hugo-development-to-replace-vscode.
+slug: 2022-04-24-neovim-for-hugo-development-to-replace-vscode
 date_published: 2022-04-24
 date_updated: 2022-04-24
 tags:
