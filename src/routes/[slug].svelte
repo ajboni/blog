@@ -1,14 +1,19 @@
 <script context="module">
-  export async function load({ params, fetch, session, stuff }) {
+  export async function load({ params, fetch, session, stuff, error }) {
     // the `slug` parameter is available because
     // this file is called [slug].svelte
-    const res = await fetch(`${params.slug}.json`)
+    const res = await fetch(`${params.slug}.json`);
     const data = await res.json();
 
     if (res.status === 200) {
-      return { post: data };
+      return {
+        props: {
+          post: data,
+          error: error,
+        },
+      };
     } else {
-      this.error(res.status, data.message);
+      throw "Post not found!";
     }
   }
 </script>
@@ -18,7 +23,38 @@
   export let post;
 </script>
 
-  
+<svelte:head>
+  <title>{post.data.title}</title>
+</svelte:head>
+
+<div
+  class="bg-gray-850 text-gray-300 flex flex-col border-2 border-gray-700 rounded-md shadow-lg px-8 py-8 sm:py-16
+  sm:px-16 text-lg leading-relaxed w-full break-words"
+>
+  <h1 class="text-4xl font-medium">{post.data.title}</h1>
+  <PostInfo {post} />
+  <div class="text-gray-300 markdown-body">
+    {@html post.content}
+  </div>
+  <hr class="mt-16 mb-8 border-gray-700" />
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="ajboni/blog"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyNDMwNTY5NTU="
+    data-category="Announcements"
+    data-category-id="DIC_kwDODnzBO84CO4vC"
+    data-mapping="title"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <div class="giscus comments" />
+</div>
 
 <style>
   /* .post-content :global(p) {
@@ -38,37 +74,3 @@
     @apply break-words whitespace-pre-line;
   } */
 </style>
-
-<svelte:head>
-  <title>{post.data.title}</title>
-</svelte:head>
-
-<div
-  class="bg-gray-850 text-gray-300 flex flex-col border-2 border-gray-700 rounded-md shadow-lg px-8 py-8 sm:py-16
-  sm:px-16 text-lg leading-relaxed w-full break-words">
-
-  <h1 class="text-4xl font-medium">{post.data.title}</h1>
-  <PostInfo {post} />
-  <div class= "text-gray-300 markdown-body">
-    {@html post.content}
-  </div>
-  <hr class="mt-16 mb-8 border-gray-700"/>
-  <script src="https://giscus.app/client.js"
-    data-repo="ajboni/blog"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkyNDMwNTY5NTU="
-    data-category="Announcements"
-    data-category-id="DIC_kwDODnzBO84CO4vC"
-    data-mapping="title"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="dark"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async>
-  </script>
-  <div class="giscus comments"></div>
-</div>
-
-

@@ -1,5 +1,6 @@
 // svelte.config.js
 import adapter from "@sveltejs/adapter-static";
+const dev = process.env.NODE_ENV === "development";
 
 export default {
   kit: {
@@ -9,6 +10,9 @@ export default {
       assets: "build",
       fallback: null,
       precompress: false,
+      paths: {
+        base: dev ? "" : "ajboni/blog",
+      },
     }),
 
     prerender: {
