@@ -1,5 +1,5 @@
 <script context="module">
-  import { posts, tags, pageInfo, tagFilter } from "../store.js";
+  import { posts, tags, pageInfo, tagFilter, init } from "../store.js";
   import Spinner from "./_spinner.svelte";
 
   function filterByTag(arr, tag) {
@@ -20,6 +20,7 @@
     tags.set(json.tags);
     tagFilter.set(tag);
     pageInfo.set({ hostname, pathname, params, searchParams });
+    init.set(true);
     return res;
   }
 </script>
@@ -29,10 +30,13 @@
   import "../main.css";
   import "../markdown.css";
   import { navigating } from "$app/stores";
+  console.log("Layout");
 </script>
 
 <div class="min-h-screen md:flex bg-gray-850">
-  {#if $navigating}
+  {#if $init === false}
+    <Spinner caption="Loading..." />
+  {:else if $navigating}
     <Spinner caption="Loading posts..." />
   {:else}
     <!-- intermediary wrapper -->

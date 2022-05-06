@@ -37,6 +37,8 @@
     {@html post.content}
   </div>
   <hr class="mt-16 mb-8 border-gray-700" />
+  <div class="giscus comments" />
+
   <script
     src="https://giscus.app/client.js"
     data-repo="ajboni/blog"
@@ -53,7 +55,6 @@
     crossorigin="anonymous"
     async>
   </script>
-  <div class="giscus comments" />
 </div>
 
 <style>
