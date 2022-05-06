@@ -34,3 +34,6 @@ For this case I will add the snippets from the [theNewDynamic language-hugo-vsco
 ## Result
 
 ![Hugo Vim](images/hugo.png)
+
+https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+https://github.com/nathanaelkane/vim-indent-guides
