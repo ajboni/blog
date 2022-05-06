@@ -18,7 +18,7 @@ marked.setOptions({
 export let tags = [];
 
 export function getPosts() {
-  console.log("Get Posts!");
+  // console.log("Get Posts!");
   const posts = [];
   let postsFile = fs.readdirSync("./static/posts/");
   postsFile.forEach((postFile) => {

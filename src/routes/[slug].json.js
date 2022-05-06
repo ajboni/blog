@@ -11,7 +11,7 @@ export function get(req, res, next) {
   // this file is called [slug].json.js
   const { slug } = req.params;
 
-  console.log(slug);
+  // console.log(slug);
 
   const result = {
     status: 404,
