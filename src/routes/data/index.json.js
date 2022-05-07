@@ -72,7 +72,7 @@ function getPosts() {
 
 function getTags(posts) {
   // Get tag list
-  tags = flatten(
+  let tags = flatten(
     posts.map((a) => {
       const arrays = a.data.tags;
       return arrays;
