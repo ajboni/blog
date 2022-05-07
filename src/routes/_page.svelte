@@ -1,16 +1,3 @@
-<script context="module">
-  export async function load({ url, fetch, params }) {
-    const { hostname, pathname } = url;
-    const res = await fetch("/data.json");
-    const json = await res.json();
-    return {
-      props: {
-        data: json,
-      },
-    };
-  }
-</script>
-
 <script>
   // import Sidebar from "./_sidebar.svelte";
   import "../main.css";

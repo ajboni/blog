@@ -1,15 +1,11 @@
+// This file is called `_posts.js` rather than `posts.js`, because
+// we don't want to create an `/blog/posts` route — the leading
+// underscore tells Sapper not to do that.
 import fs from "fs";
-import { getPostDate } from "../../utils.js";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import matter from "gray-matter";
-
-import shell from "highlight.js/lib/languages/shell";
-import sql from "highlight.js/lib/languages/sql";
-
-hljs.registerLanguage("shell", shell);
-hljs.registerLanguage("sql", sql);
-
+// hljs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
 // hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
 
 marked.setOptions({
@@ -18,31 +14,6 @@ marked.setOptions({
     return hljs.highlight(validLanguage, code).value;
   },
 });
-
-/* Main GET Response*/
-export async function get({ params }) {
-  const data = getData();
-  let processedPosts = data.posts;
-  const sortedPosts = processedPosts.sort((a, b) => new Date(getPostDate(b)) - new Date(getPostDate(a)));
-
-  const contents = sortedPosts.map((post) => {
-    return {
-      ...post,
-    };
-  });
-
-  let result = {
-    posts: contents,
-    tags: data.tags,
-  };
-
-  return {
-    "Content-Type": "application/json",
-    status: 200,
-    statusText: "OK",
-    body: result,
-  };
-}
 
 /* Gett all the data (posts and tags) */
 export function getData() {
@@ -64,7 +35,6 @@ function getPosts() {
     const matterPost = matter(fileContents, { excerpt: true, excerpt_separator: "<!-- more -->" });
     matterPost.content = marked(matterPost.content);
     matterPost.excerpt = marked(matterPost.excerpt);
-    matterPost.data.fileName = postFile;
     posts.push(matterPost);
   });
   return posts;

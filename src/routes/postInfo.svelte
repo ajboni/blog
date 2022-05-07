@@ -1,12 +1,10 @@
 <script>
   export let post;
-  import { getPostDate, getDefaultAuthor } from "../store.js";
-
+  import { getPostDate, getDefaultAuthor } from "../utils.js";
   const date = new Date(getPostDate(post));
   const tags = post.data.tags ? post.data.tags : null;
   const author = post.data.author ? post.data.author : getDefaultAuthor();
   let shortDate = isValidDate(date) ? date.toLocaleDateString() : "";
-
   function isValidDate(d) {
     return d instanceof Date && !isNaN(d);
   }

@@ -1,25 +1,19 @@
 <script context="module">
-  export async function load({ params, fetch, session, stuff, error }) {
-    // the `slug` parameter is available because
-    // this file is called [slug].svelte
-    const res = await fetch(`${params.slug}.json`);
-    const data = await res.json();
-
-    if (res.status === 200) {
-      return {
-        props: {
-          post: data,
-          error: error,
-        },
-      };
-    } else {
-      throw "Post not found!";
-    }
+  export async function load({ url, fetch, params }) {
+    const res = await fetch("/data.json");
+    const json = await res.json();
+    const post = json.posts.find((post) => post.data.slug === params.slug);
+    return {
+      props: {
+        post: post,
+      },
+    };
   }
 </script>
 
 <script>
   import PostInfo from "./postInfo.svelte";
+  import { browser } from "$app/env";
   export let post;
 </script>
 
@@ -37,24 +31,26 @@
     {@html post.content}
   </div>
   <hr class="mt-16 mb-8 border-gray-700" />
-  <div class="giscus comments" />
-
-  <script
-    src="https://giscus.app/client.js"
-    data-repo="ajboni/blog"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkyNDMwNTY5NTU="
-    data-category="Announcements"
-    data-category-id="DIC_kwDODnzBO84CO4vC"
-    data-mapping="title"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="dark"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async>
-  </script>
+  <div class="giscus comments">
+    {#if browser}
+      <script
+        src="https://giscus.app/client.js"
+        data-repo="ajboni/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNDMwNTY5NTU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODnzBO84CO4vC"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    {/if}
+  </div>
 </div>
 
 <style>

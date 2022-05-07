@@ -1,11 +1,5 @@
-import { writable } from "svelte/store";
-export let posts = writable([]);
-export let tags = writable([]);
-export let tagFilter = writable({});
-export let pageInfo = writable({});
-export let init = writable(false);
-
 export function getPostDate(post) {
+  if (!post) return null;
   if (post.data.date_updated) {
     return post.data.date_updated;
   } else if (post.data.date_published) {
