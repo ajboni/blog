@@ -11,7 +11,7 @@ export default {
       fallback: null,
       precompress: false,
       paths: {
-        base: dev ? "" : "ajboni/blog",
+        base: dev ? "" : "",
       },
     }),
 
