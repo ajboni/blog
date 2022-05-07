@@ -14,22 +14,31 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-import { g as getPosts, a as getTags } from "../../../chunks/_posts-1bafef52.js";
-import { g as getPostDate } from "../../../chunks/store-b58f4d9c.js";
-import "fs";
-import "marked";
-import "highlight.js";
-import "gray-matter";
-import "../../../chunks/index-eb6f75e0.js";
+import fs from "fs";
+import { g as getPostDate } from "../../../chunks/utils-07a183c9.js";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import matter from "gray-matter";
+import shell from "highlight.js/lib/languages/shell";
+import sql from "highlight.js/lib/languages/sql";
+hljs.registerLanguage("shell", shell);
+hljs.registerLanguage("sql", sql);
+marked.setOptions({
+  highlight: function(code, language) {
+    const validLanguage = hljs.getLanguage(language) ? language : "plaintext";
+    return hljs.highlight(code, { language: validLanguage }).value;
+  }
+});
 async function get({ params }) {
-  let processedPosts = getPosts();
+  const data = getData();
+  let processedPosts = data.posts;
   const sortedPosts = processedPosts.sort((a, b) => new Date(getPostDate(b)) - new Date(getPostDate(a)));
   const contents = sortedPosts.map((post) => {
     return __spreadValues({}, post);
   });
   let result = {
-    contents,
-    tags: getTags()
+    posts: contents,
+    tags: data.tags
   };
   return {
     "Content-Type": "application/json",
@@ -38,4 +47,39 @@ async function get({ params }) {
     body: result
   };
 }
-export { get };
+function getData() {
+  const posts = getPosts();
+  const tags = getTags(posts);
+  const result = {
+    posts,
+    tags
+  };
+  return result;
+}
+function getPosts() {
+  const posts = [];
+  let postsFile = fs.readdirSync("./static/posts/");
+  postsFile.forEach((postFile) => {
+    const fileContents = fs.readFileSync("./static/posts/" + postFile, "utf8");
+    const matterPost = matter(fileContents, { excerpt: true, excerpt_separator: "<!-- more -->" });
+    matterPost.content = marked(matterPost.content);
+    matterPost.excerpt = marked(matterPost.excerpt);
+    matterPost.data.fileName = postFile;
+    posts.push(matterPost);
+  });
+  return posts;
+}
+function getTags(posts) {
+  let tags = flatten(posts.map((a) => {
+    const arrays = a.data.tags;
+    return arrays;
+  }));
+  tags = tags.filter((v, i, a) => a.indexOf(v) === i);
+  return tags;
+}
+function flatten(arr) {
+  return arr.reduce(function(flat, toFlatten) {
+    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+  }, []);
+}
+export { get, getData };

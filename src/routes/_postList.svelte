@@ -1,5 +1,5 @@
 <script>
-  import PostInfo from "./postInfo.svelte";
+  import PostInfo from "./_postInfo.svelte";
   export let data;
 </script>
 

@@ -3,10 +3,10 @@ title: "Kingdom Come: Deliverance working on Linux @ 60FPS"
 slug: kingdom-come-deliverance
 date_published: 2019-07-29T14:34:33.000Z
 date_updated: 2019-08-10T20:01:47.000Z
-tags: 
-   - Linux
-   - Gaming
-   - Proton
+tags:
+  - Linux
+  - Gaming
+  - Proton
 ---
 
 I recently impulse bought [Kingdom Come: Deliverance](https://store.steampowered.com/app/379430/Kingdom_Come_Deliverance/) in hope that proton would handle it out of the box. I quickly discovered that performance was really bad and a lot of users were having the same issue.
@@ -32,7 +32,7 @@ However I managed to get it working thanks to some anonymous user on ProtonDB. I
 8. Then select Proton-4.11-GE-1 from the drop down and click CLOSE.
 
 After these steps my game is running really smooth @ 60fps on medium/high quality.
-![](/content/images/2019/07/Screenshot_20190729_225310.png)The machine specs
+
 ## Fixing DPMS and Screen Saver Issues
 
 I encountered one problem though, after a few minutes playing with a 360 controller, the screen would go black and I needed to press a key to resume it, alt-tab it and the go back, all this every 15 minutes.
@@ -48,7 +48,6 @@ Unfortunatelly there is no package for OpenSUSE yet so I just run the bin before
 ```shell
     cd joystickwake
     ./joystickwake
-```    
+```
 
-![](/content/images/2019/07/Screenshot_20190729_230235.png)Now go and get some ale!
 Happy gaming!

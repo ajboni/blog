@@ -17,7 +17,13 @@
 
 <script>
   import PostList from "../_postList.svelte";
+  import Spinner from "../_spinner.svelte";
+  import { navigating } from "$app/stores";
   export let data;
 </script>
 
-<PostList {data} />
+{#if $navigating}
+  <Spinner caption="Loading posts..." />
+{:else}
+  <PostList {data} />
+{/if}

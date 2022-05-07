@@ -1,5 +1,4 @@
 <script>
-  import { page } from "$app/stores";
   export let data;
   const sidebarBtnClass = "w-1/4 sm:w-full text-center p-2 hover:bg-purple-500 ";
 </script>
@@ -12,7 +11,7 @@
 >
   <div class="gradient">[a]</div>
 
-  <a class={sidebarBtnClass + " " + ($page.url.pathname === undefined ? "bg-purple-800" : "")} href="/"> Home </a>
+  <a class={sidebarBtnClass + " bg-purple-800"} href="/"> Home </a>
 
   <div class={"hidden sm:flex w-full my-2 sm:w-5/6 justify-center flex-wrap " + " "}>
     <!-- If we have at least 2 tags, add option to remove filter -->
