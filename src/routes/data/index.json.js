@@ -15,7 +15,7 @@ hljs.registerLanguage("sql", sql);
 marked.setOptions({
   highlight: function (code, language) {
     const validLanguage = hljs.getLanguage(language) ? language : "plaintext";
-    return hljs.highlight(validLanguage, code).value;
+    return hljs.highlight(code, { language: validLanguage }).value;
   },
 });
 

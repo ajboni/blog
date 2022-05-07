@@ -12,7 +12,7 @@
 >
   <div class="gradient">[a]</div>
 
-  <a class={sidebarBtnClass + " " + ($page.url.pathname === undefined ? "bg-purple-800" : "")} href="."> Home </a>
+  <a class={sidebarBtnClass + " " + ($page.url.pathname === undefined ? "bg-purple-800" : "")} href="/"> Home </a>
 
   <div class={"hidden sm:flex w-full my-2 sm:w-5/6 justify-center flex-wrap " + " "}>
     <!-- If we have at least 2 tags, add option to remove filter -->
