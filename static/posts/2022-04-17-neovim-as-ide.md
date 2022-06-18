@@ -69,26 +69,28 @@ lvim.autocommands.custom_groups = {
 ## ⊙ (cmp) Disable Annoying automcompletion by default and some nice keymappings
 
 ```lua
-cmp = {
-  completion = {
-   keyword_length = 2,
-  },
-   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<PageUp>"] = function(fallback)
-      for i = 1, 5 do
-        cmp.mapping.select_prev_item()(fallback)
-      end
-    end,
-    ["<PageDown>"] = function(fallback)
-      for i = 1, 5 do
-        cmp.mapping.select_next_item()(fallback)
-      end
-    end,
-  }),
+plugins = {
+  cmp = {
+    completion = {
+     keyword_length = 2,
+    },
+     mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ["<PageUp>"] = function(fallback)
+        for i = 1, 5 do
+          cmp.mapping.select_prev_item()(fallback)
+        end
+      end,
+      ["<PageDown>"] = function(fallback)
+        for i = 1, 5 do
+          cmp.mapping.select_next_item()(fallback)
+        end
+      end,
+    }),
+  }
 }
 ```
 
