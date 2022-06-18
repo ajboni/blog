@@ -42,7 +42,17 @@ formatters.setup {
 ```
 
 > `prettier` should be installed globally (`npm i -g prettier`) `.prettierrc` should be present on the local repo.  
-> `jsconfig` file was needed to for autoimport to work properly with js files and react components.
+> `jsconfig` file was needed to for autoimport to work properly with js files and react components:
+
+```json
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6"
+  },
+  "exclude": ["node_modules"]
+}
+```
 
 ## ⊙ (cmp) Disable automatic autocompletion.
 
