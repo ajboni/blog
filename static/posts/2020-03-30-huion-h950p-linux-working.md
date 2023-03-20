@@ -2,7 +2,7 @@
 title: How to make Huion h950p work under linux.
 slug: 2020-03-30-huion-h950p-linux-working
 date_published: 2020-03-30
-date_updated: 2020-03-30
+date_updated: 2023-03-19
 tags:
   - Linux
   - Art
@@ -13,6 +13,13 @@ I recently acquired a Huion Tablet, precisely the model h950p.The tablet works f
 Thanks to the wonderful [DIGImend](https://github.com/DIGImend/digimend-kernel-drivers project and [this](https://github.com/DIGImend/digimend-kernel-drivers/issues/308#issuecomment-586072412) issue on github the solution is quite simple.
 
 <!-- more -->
+
+# UPDATE 2023
+
+This works out of the box on Arch Linux! 🚀
+For constraining to a single monitor in Wayland read this: https://wiki.archlinux.org/title/Graphics_tablet#Wayland_and_libinput
+
+# Original Article
 
 - First, clone the github repo. (the .deb file do not work at the moment of this writing)
 

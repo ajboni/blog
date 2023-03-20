@@ -1,8 +1,8 @@
 ---
 title: Neovim as IDE
-slug: 2022-04-17-neovim-as-ide
-date_published: 2022-05-01
-date_updated: 2022-08-03
+slug: 2021-04-17-neovim-as-ide
+date_published: 2021-05-01
+date_updated: 2023-20-03
 tags:
   - Neovim
   - Linux
@@ -13,25 +13,93 @@ This is my attempt to migrate to neovim and use it as IDE for web Development.
 
 <!-- more -->
 
-# Option #1 - Based on bushblade/nvim
+# ⊙ Update 2023
 
-This is what I ended up using as for August 2023. The starting point was [bushblade/nvim](https://github.com/bushblade/nvim) and some changes were made.
+I've ended add going back to [AstroNvim](https://github.com/AstroNvim/AstroNvim) and I can say it's incredible, great defaults, pretty and `blazingly fast!`  
+Only a few shortcuts here and there and its ready to go!
 
-The final config is available at [this repo](https://github.com/ajboni/nvim-2)
+Some tips:
 
-# Option #2 - Based on AstroNvim
+- Just remember to install your TS parsers `:TSInstall <parser>`
 
-The starting point is [AstroNvim](https://astronvim.github.io/)
+  - `:TSInstall javascript javascriptreact lua json`
+  - `:TSInstall markdown markdown_inline`
 
-Complete config can be found at https://github.com/ajboni/astronvim_config
+- Add LSP/DAP/Linters/Formatters with `:Mason`
+- set up a `.config/astronvim` folder for storing user config. [My config](https://github.com/ajboni/astronvim_config_2023)
 
 # Config Tips
+
+These might not be compatible with newer astronvim config, but good for reference.
 
 ## ⊙ Keyboard goodies
 
 ```lua
 vim.opt.keymodel = "startsel,stopsel" -- Allow selection with shift+arrow keys
+map("i", "<Space>", "<Space><C-g>u")
+map("i", "<Return>", "<Return><C-g>u")
+map("i", "<Tab>", "<Tab><C-g>u")
+
+-- -- Copy / Paste / Cut
+
+map("v", "<C-c>", "y") -- Copy: As mostly in visual mode.
+map("i", "<C-v>", "<c-r>+") -- Copy: As in visual mode.
+map("v", "<C-x>", "d") -- Copy: As in visual mode.
+map("i", "<C-x>", "<c-o>dd") -- In insert mode cut whole line.
+map("n", "<C-v>", "a<c-r>+<esc>") -- Enter insert mode, get register, paste it, back to normal mode.
+--
+map("i", "<C-ins>", "<Esc>") -- exit insert mode.
+map("n", "<ins>", "a") -- Enter insert mode (appending)
+
+map("n", "<C-a>", "ggVGygv") -- Select and yank entire buffer
+map("i", "<C-a>", "<esc>ggVGygv") -- Select and yank entire buffer
+
+-- -- Undo/Redo
+map("i", "<C-z>", "<C-o>u") -- Undo
+map("n", "<C-z>", "u") -- undo
+map("v", "<C-z>", "u") -- undo
+map("n", "<C-y>", ":redo<cr>") -- Redo
+
+-- "fine grained" undo.
+-- https://stackoverflow.com/questions/2895551/how-do-i-get-fine-grained-undo-in-vim
+map("i", "<Space>", "<Space><C-g>u")
+map("i", "<Return>", "<Return><C-g>u")
+map("i", "<Tab>", "<Tab><C-g>u")
+
+-- -- Navigate through buffers
+map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>")
+map("n", "<Tab>", ":BufferLineCycleNext <cr>")
+map("n", "<C-s>", ":w<cr>") -- Save buffer
+map("i", "<C-s>", "<Esc>:w<cr>") -- Save buffer
+map("n", "<C-e>", "<C-w>") -- Close buffer
+map("n", "<C-w>", ":bdelete<cr>") -- Close buffer
+
+-- Hop
+map("n", "<C-f>", "<cmd>HopWord<cr>") -- Hop through words in whole "viewport"
+map("n", "F", "<cmd>HopLine<cr>") -- Hop through lines in whole "viewport"
+map({ "n", "v" }, "f", "<esc><cmd>HopWordCurrentLine<cr>") -- Hop through words on current line
+map({ "i" }, "<C-f>", "<esc><cmd>HopWordCurrentLine<cr>") -- Hop through lines in whole "viewport" in edit mode.
+
+-- Global shorcuts
+map({ "n", "i" }, "<F2>", ":Telescope keymaps <cr>")
+map({ "n", "i" }, "<F3>", ":Telescope commands <cr>")
+map({ "n", "i" }, "<F4>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
+map({ "n", "i" }, "<F10>", "<esc>:Telescope lsp_dynamic_workspace_symbols<cr>")
+map({ "n", "i" }, "<F11>", "<esc>:Telescope lsp_document_symbols<cr>")
+map({ "n", "i" }, "<F12>", "<esc><cmd>lua vim.lsp.buf.definition()<cr>")
+
+-- File Picker
+map({ "n", "i" }, "<C-]>", "<esc>:Telescope oldfiles hidden=true<cr>")
+
+-- LSP via Telescope
+local telescope = require("telescope.builtin")
+map("n", "gD", vim.lsp.buf.declaration) -- Go to declaration
+map("n", "gd", telescope.lsp_definitions) -- Go to definition
+map("n", "gr", telescope.lsp_references) -- (Go to) references
+map("n", "gi", telescope.lsp_implementations) -- (Go to) Implementations
 ```
+
+# OLD Stuff
 
 ## ⊙ Prettier
 
@@ -161,84 +229,14 @@ This one took me a while, https://github.com/windwp/nvim-ts-autotag/issues/36
 
 https://stackoverflow.com/questions/2895551/how-do-i-get-fine-grained-undo-in-vim
 
-```lua
-map("i", "<Space>", "<Space><C-g>u")
-map("i", "<Return>", "<Return><C-g>u")
-map("i", "<Tab>", "<Tab><C-g>u")
-```
-
 ## Tailwind CSS support
 
 ```
 :LspInstall tailwindcss
+
 ```
 
 ## Nice shortcuts
-
-```lua
--- -- Copy / Paste / Cut
-
-map("v", "<C-c>", "y") -- Copy: As mostly in visual mode.
-map("i", "<C-v>", "<c-r>+") -- Copy: As in visual mode.
-map("v", "<C-x>", "d") -- Copy: As in visual mode.
-map("i", "<C-x>", "<c-o>dd") -- In insert mode cut whole line.
-map("n", "<C-v>", "a<c-r>+<esc>") -- Enter insert mode, get register, paste it, back to normal mode.
---
-map("i", "<C-ins>", "<Esc>") -- exit insert mode.
-map("n", "<ins>", "a") -- Enter insert mode (appending)
-
-map("n", "<C-a>", "ggVGygv") -- Select and yank entire buffer
-map("i", "<C-a>", "<esc>ggVGygv") -- Select and yank entire buffer
-
--- -- Undo/Redo
-map("i", "<C-z>", "<C-o>u") -- Undo
-map("n", "<C-z>", "u") -- undo
-map("v", "<C-z>", "u") -- undo
-map("n", "<C-y>", ":redo<cr>") -- Redo
-
--- "fine grained" undo.
--- https://stackoverflow.com/questions/2895551/how-do-i-get-fine-grained-undo-in-vim
-map("i", "<Space>", "<Space><C-g>u")
-map("i", "<Return>", "<Return><C-g>u")
-map("i", "<Tab>", "<Tab><C-g>u")
-
--- -- Navigate through buffers
-map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>")
-map("n", "<Tab>", ":BufferLineCycleNext <cr>")
-map("n", "<C-s>", ":w<cr>") -- Save buffer
-map("i", "<C-s>", "<Esc>:w<cr>") -- Save buffer
-map("n", "<C-e>", "<C-w>") -- Close buffer
-map("n", "<C-w>", ":bdelete<cr>") -- Close buffer
-
--- Hop
-map("n", "<C-f>", "<cmd>HopWord<cr>") -- Hop through words in whole "viewport"
-map("n", "F", "<cmd>HopLine<cr>") -- Hop through lines in whole "viewport"
-map({ "n", "v" }, "f", "<esc><cmd>HopWordCurrentLine<cr>") -- Hop through words on current line
-map({ "i" }, "<C-f>", "<esc><cmd>HopWordCurrentLine<cr>") -- Hop through lines in whole "viewport" in edit mode.
-
--- Global shorcuts
-map({ "n", "i" }, "<F2>", ":Telescope keymaps <cr>")
-map({ "n", "i" }, "<F3>", ":Telescope commands <cr>")
-map({ "n", "i" }, "<F4>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
-map({ "n", "i" }, "<F10>", "<esc>:Telescope lsp_dynamic_workspace_symbols<cr>")
-map({ "n", "i" }, "<F11>", "<esc>:Telescope lsp_document_symbols<cr>")
-map({ "n", "i" }, "<F12>", "<esc><cmd>lua vim.lsp.buf.definition()<cr>")
-
--- File Picker
-map({ "n", "i" }, "<C-]>", "<esc>:Telescope oldfiles hidden=true<cr>")
-
--- Comments
-map("n", "<C-/>", "<Cmd>lua require('Comment.api').toggle_current_blockwise_op()<CR>") -- (CTRL + /) Add a comment
-map("i", "<C-/>", "<Esc><Cmd>lua require('Comment.api').toggle_current_blockwise_op()<CR>^i") -- (CTRL + /) Add a comment
-map("x", "<C-/>", '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
-
--- LSP via Telescope
-local telescope = require("telescope.builtin")
-map("n", "gD", vim.lsp.buf.declaration) -- Go to declaration
-map("n", "gd", telescope.lsp_definitions) -- Go to definition
-map("n", "gr", telescope.lsp_references) -- (Go to) references
-map("n", "gi", telescope.lsp_implementations) -- (Go to) Implementations
-```
 
 ## More Awesome Plugins
 
@@ -246,3 +244,7 @@ map("n", "gi", telescope.lsp_implementations) -- (Go to) Implementations
 - https://github.com/phaazon/hop.nvim - For easier navigation.
 - https://github.com/tpope/vim-surround - Delete/change/add parentheses/quotes/XML-tags/much more with ease
 - Glow for markdown preview
+
+```
+
+```
