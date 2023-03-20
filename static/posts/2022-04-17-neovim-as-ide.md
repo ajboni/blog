@@ -2,7 +2,7 @@
 title: Neovim as IDE
 slug: 2021-04-17-neovim-as-ide
 date_published: 2021-05-01
-date_updated: 2023-20-03
+date_updated: 2023-03-19
 tags:
   - Neovim
   - Linux
@@ -22,7 +22,7 @@ Some tips:
 
 - Just remember to install your TS parsers `:TSInstall <parser>`
 
-  - `:TSInstall javascript javascriptreact lua json`
+  - `:TSInstall javascript typescript lua json`
   - `:TSInstall markdown markdown_inline`
 
 - Add LSP/DAP/Linters/Formatters with `:Mason`
