@@ -9,6 +9,7 @@ const css = {
 };
 const sidebarBtnClass = "w-1/4 sm:w-full text-center p-2 hover:bg-purple-500 ";
 const Sidebar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  var _a;
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)
     $$bindings.data(data);
@@ -20,7 +21,7 @@ const Sidebar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   <a class="${escape(null_to_empty(sidebarBtnClass + " bg-purple-800")) + " svelte-s9k6wd"}" href="${"/"}">Home </a>
 
   <div class="${escape(null_to_empty("hidden sm:flex w-full my-2 sm:w-5/6 justify-center flex-wrap  ")) + " svelte-s9k6wd"}">
-    ${data.tags.length > 2 ? `<a class="${"bg-purple-800 text-white mx-1 my-1 px-1 py-0.5 text-xs rounded-sm cursor-pointer"}" href="${"/"}">all
+    ${((_a = data.tags) == null ? void 0 : _a.length) > 2 ? `<a class="${"bg-purple-800 text-white mx-1 my-1 px-1 py-0.5 text-xs rounded-sm cursor-pointer"}" href="${"/"}">all
       </a>` : ``}
 
     ${each(data.tags, (tag) => {

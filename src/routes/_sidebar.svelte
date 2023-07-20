@@ -15,7 +15,7 @@
 
   <div class={"hidden sm:flex w-full my-2 sm:w-5/6 justify-center flex-wrap " + " "}>
     <!-- If we have at least 2 tags, add option to remove filter -->
-    {#if data.tags.length > 2}
+    {#if data.tags?.length > 2}
       <a
         class="bg-purple-800 text-white mx-1 my-1 px-1 py-0.5 text-xs
         rounded-sm cursor-pointer"
